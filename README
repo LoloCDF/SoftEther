@@ -1,1 +1,20 @@
-Este es el README.
+ ************************************
+ * INSTALLATION                     *
+ ************************************
+
+ You can easily install "SoftEther VPN Server" just running "install.sh" script.
+ Please, notice that during the installation, some changes will be made to "PATH"
+ variable. In order to make those changes effective, we should run the scripts with
+ "." operator. Ex: '. install.sh'
+
+ But it's possible to add manually "/usr/local/vpnserver" directory to PATH variable too.
+
+ ************************************
+ * UNINSTALL                        *
+ ************************************
+
+ You can easily	uninstall "SoftEther VPN Server" just running "uninstall.sh" script.
+ Please, notice	that during the	uninstallation, some changes will be made to "PATH"
+ variable. The value will be restored from "PATH.bck". In order to make those changes 
+ effective, we	should run the scripts with "." operator. Ex: '. uninstall.sh'
+                            
