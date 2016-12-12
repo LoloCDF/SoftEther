@@ -41,5 +41,10 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	service vpnserver start
 	service vpnserver stop
 	echo "You can now start the service."
-	cp /usr/local/vpnserver/vpn_server.config /usr/local/vpnserver/vpn_server.config.bck
+	ls /usr/local/vpnserver/vpn_server.config &> /dev/null
+	
+	while [ $? -ne 0 ]; do
+		ls /usr/local/vpnserver/vpn_server.config &> /dev/null
+	done
+	cp /usr/local/vpnserver/vpn_server.config /usr/local/vpnserver/vpn_server.config.bck &> /dev/null
 fi
