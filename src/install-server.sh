@@ -30,9 +30,19 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	make
 	cd ../
 	mv vpnserver /usr/local/
+	
+	# We change the actual PATH variable value
 	echo $PATH > /usr/local/vpnserver/PATH.bck
 	export PATH="$PATH:/usr/local/vpnserver/"
-	echo $PATH	
+	
+	# We have to change the default PATH value
+	ls /usr/local/vpnclient > /dev/null
+	if [ $? -eq 0 ]; then
+		cp -f ./files/path-server-client.bck ~/.bash_profile
+	else
+		cp -f ./files/path-server.bck ~/.bash_profile
+	fi
+
 	echo "SoftEther Server installed in /usr/local/, you can check it running 'vpncmd' command."	
 	echo "Setting up the first configuration..."
 	cp -f ./files/vpnserver /etc/init.d
