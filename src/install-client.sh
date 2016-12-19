@@ -24,10 +24,10 @@ fi
 
 if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then	
 	echo "Decompressing SoftEther Client..."
-	tar xzvf softether-vpnclient-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+	tar xzvf softether-vpnclient-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz &> /dev/null
 	echo "Installing..."
 	cd vpnclient
-	make
+	make i_read_and_agree_the_license_agreement &> /dev/null
 	cd ../
 	mv vpnclient /usr/local/
 	
@@ -44,9 +44,9 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	# We have to change the default PATH value
 	ls /usr/local/vpnserver &> /dev/null
 	if [ $? -eq 0 ]; then
-		echo "s" | cp -f ./files/path-server-client.bck ~/.bash_profile
+		echo "s" | cp -f ./files/path-server-client.bck ~/.bash_profile &> /dev/null
 	else
-		echo "s" | cp -f ./files/path-client.bck ~/.bash_profile
+		echo "s" | cp -f ./files/path-client.bck ~/.bash_profile &> /dev/null
 	fi
 
 	echo "SoftEther Client installed in /usr/local/. Configuring service..."
@@ -55,11 +55,5 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	/sbin/chkconfig --add vpnclient
 	service vpnclient start &> /dev/null
 	service vpnclient stop &> /dev/null
-	echo "You can now start the service."
-	ls /usr/local/vpnclient/vpn_client.config &> /dev/null
-	
-	while [ $? -ne 0 ]; do
-		ls /usr/local/vpnclient/vpn_client.config &> /dev/null
-	done
-	cp /usr/local/vpnclient/vpn_client.config /usr/local/vpnclient/vpn_client.config.bck		
+	echo "You can now start the service."		
 fi

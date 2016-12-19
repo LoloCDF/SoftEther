@@ -20,8 +20,6 @@ else
 fi
 
 if [ $ROOT = "TRUE" ] && [ $INSTALLED = "TRUE" ]; then	
-	echo "Restoring initial state..."
-	. restore-default-server-conf.sh
 	service vpnserver stop &> /dev/null
 	
 	# We have to restore PATH variable

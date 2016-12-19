@@ -24,37 +24,29 @@ fi
 
 if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then	
 	echo "Decompressing SoftEther Server..."
-	tar xzvf softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+	tar xzvf softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz &> /dev/null
 	echo "Installing..."
 	cd vpnserver
-	make
+	make i_read_and_agree_the_license_agreement &> /dev/null
 	cd ../
 	mv vpnserver /usr/local/
 	
 	# We change the actual PATH variable value
 	echo $PATH > /usr/local/vpnserver/PATH.bck
 	export PATH="$PATH:/usr/local/vpnserver/"
-	
 	# We have to change the default PATH value
-	ls /usr/local/vpnclient > /dev/null
+	ls /usr/local/vpnclient &> /dev/null
 	if [ $? -eq 0 ]; then
-		cp -f ./files/path-server-client.bck ~/.bash_profile
+		echo "s" | cp -f ./files/path-server-client.bck ~/.bash_profile &> /dev/null
 	else
-		cp -f ./files/path-server.bck ~/.bash_profile
+		echo "s" | cp -f ./files/path-server.bck ~/.bash_profile &> /dev/null
 	fi
 
 	echo "SoftEther Server installed in /usr/local/, you can check it running 'vpncmd' command."	
-	echo "Setting up the first configuration..."
 	cp -f ./files/vpnserver /etc/init.d
 	chmod 755 /etc/init.d/vpnserver
 	/sbin/chkconfig --add vpnserver
-	service vpnserver start
-	service vpnserver stop
+	service vpnserver start &> /dev/null
+	service vpnserver stop &> /dev/null
 	echo "You can now start the service."
-	ls /usr/local/vpnserver/vpn_server.config &> /dev/null
-	
-	while [ $? -ne 0 ]; do
-		ls /usr/local/vpnserver/vpn_server.config &> /dev/null
-	done
-	cp /usr/local/vpnserver/vpn_server.config /usr/local/vpnserver/vpn_server.config.bck &> /dev/null
 fi

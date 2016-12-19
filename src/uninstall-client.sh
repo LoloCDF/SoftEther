@@ -19,9 +19,7 @@ else
 	echo "SoftEther VPN Client is not installed."
 fi
 
-if [ $ROOT = "TRUE" ] && [ $INSTALLED = "TRUE" ]; then	
-	echo "Restoring  initial state..."
-	. restore-default-client-conf.sh	
+if [ $ROOT = "TRUE" ] && [ $INSTALLED = "TRUE" ]; then		
 	service vpnclient stop &> /dev/null
 	
 	# We have to restore PATH variable
