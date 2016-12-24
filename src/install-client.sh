@@ -44,8 +44,10 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	# We have to change the default PATH value
 	ls /usr/local/vpnserver &> /dev/null
 	if [ $? -eq 0 ]; then
+		echo "Server found."
 		echo "s" | cp -f ./files/path-server-client.bck ~/.bash_profile &> /dev/null
 	else
+		echo "Server not found."
 		echo "s" | cp -f ./files/path-client.bck ~/.bash_profile &> /dev/null
 	fi
 
