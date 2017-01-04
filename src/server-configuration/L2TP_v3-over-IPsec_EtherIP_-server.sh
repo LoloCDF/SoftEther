@@ -12,11 +12,16 @@
 ############################################################
 
 SERVER=$1
+VHUB=$2
 
 if [ -z $SERVER ]; then
     SERVER=127.0.0.1
 fi
 
-vpncmd $SERVER:5555 /SERVER /CMD IPsecEnable /L2TP:no /L2TPRAW:no /ETHERIP:yes /PSK:abcd /DEFAULTHUB:DEFAULT &> /dev/null
+if [ -z $VHUB ]; then
+    VHUB=DEFAULT
+fi
 
-echo "L2TPv3 over IPsec (EtherIP) enabled on $SERVER server."
+vpncmd $SERVER:5555 /SERVER /CMD IPsecEnable /L2TP:no /L2TPRAW:no /ETHERIP:yes /PSK:abcd /DEFAULTHUB:$VHUB &> /dev/null
+
+echo "L2TPv3 over IPsec (EtherIP) enabled on $SERVER server with $VHUB default virtual hub."
