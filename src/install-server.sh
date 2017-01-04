@@ -1,5 +1,16 @@
 #!/bin/bash
 
+############################################################
+# File: install-server.sh                                  #
+# Author: Manuel Aragón Añino                              #
+# Date: 11/12/2016                                         #
+#                                                          #
+# Description: installation script for SoftEther VPN       #
+# Server.                                                  #
+#                                                          #
+# Usage: . install-server.sh                               #
+############################################################
+
 # Control variables
 INSTALLED=FALSE
 ROOT=FALSE
@@ -48,7 +59,10 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	cp -f ./files/vpnserver /etc/init.d
 	chmod 755 /etc/init.d/vpnserver
 	/sbin/chkconfig --add vpnserver
+	
+	cp -f ./files/vpn_server.config /usr/local/vpnserver
+
 	service vpnserver start &> /dev/null
-	service vpnserver stop &> /dev/null
-	echo "You can now start the service."
+	
+	echo "Service already running."
 fi

@@ -1,5 +1,16 @@
 #!/bin/bash
 
+############################################################
+# File: install-client.sh                                  #
+# Author: Manuel Aragón Añino                              #
+# Date: 11/12/2016                                         #
+#                                                          #
+# Description: installation script for SoftEther VPN       #
+# Client.                                                  #
+#                                                          #
+# Usage: . install-client.sh                               #
+############################################################
+
 # Control variables
 INSTALLED=FALSE
 ROOT=FALSE
@@ -56,6 +67,5 @@ if [ $INSTALLED = "FALSE" ] && [ $ROOT = "TRUE" ]; then
 	chmod 755 /etc/init.d/vpnclient
 	/sbin/chkconfig --add vpnclient
 	service vpnclient start &> /dev/null
-	service vpnclient stop &> /dev/null
-	echo "You can now start the service."		
+	echo "Service already running."       		
 fi

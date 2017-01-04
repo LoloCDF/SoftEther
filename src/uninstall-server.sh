@@ -1,3 +1,16 @@
+#!/bin/bash
+
+############################################################
+# File: uninstall-server.sh                                #
+# Author: Manuel Aragón Añino                              #
+# Date: 11/12/2016                                         #
+#                                                          #
+# Description: uninstallation script for SoftEther VPN     #
+# Server.                                                  #
+#                                                          #
+# Usage: . uninstall-server.sh                             #
+############################################################
+
 # We have to check if you are running as root user
 ROOT=FALSE
 user=$(whoami)
@@ -29,7 +42,6 @@ if [ $ROOT = "TRUE" ] && [ $INSTALLED = "TRUE" ]; then
 	# We have to restore default PATH variable
 	rm -f ~/.bash_profile
 	cp ./files/path.bck ~/.bash_profile
-
 	rm -rf /usr/local/vpnserver /etc/init.d/vpnserver
 	echo "SoftEther VPN Server has been uninstalled correctly."
 fi

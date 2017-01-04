@@ -1,3 +1,16 @@
+#!/bin/bash
+
+############################################################
+# File: uninstall-client.sh                                #
+# Author: Manuel Aragón Añino                              #
+# Date: 11/12/2016                                         #
+#                                                          #
+# Description: uninstallation script for SoftEther VPN     #
+# Client.                                                  #
+#                                                          #
+# Usage: . uninstall-client.sh                             #
+############################################################
+
 # We have to check if you are running as root user
 ROOT=FALSE
 user=$(whoami)
