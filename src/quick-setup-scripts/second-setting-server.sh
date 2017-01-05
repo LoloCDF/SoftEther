@@ -21,3 +21,9 @@ vpncmd 127.0.0.1:5555 /SERVER /HUB:HubB /CMD:DhcpSet /START:20.0.0.2 /END:20.0.0
 echo "DHCP enabled and configured for both hubs."
 
 # Now, we will setup the router between both hubs
+vpncmd 127.0.0.1:5555 /SERVER /CMD:RouterAdd default &> /dev/null
+vpncmd 127.0.0.1:5555 /SERVER /CMD:RouterIfAdd default /HUB:HubA /IP:10.0.0.1/255.255.255.0
+vpncmd 127.0.0.1:5555 /SERVER /CMD:RouterIfAdd default /HUB:HubB /IP:20.0.0.1/255.255.255.0
+vpncmd 127.0.0.1:5555 /SERVER /CMD:RouterStart
+
+echo "Router have been started."
