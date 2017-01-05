@@ -1,11 +1,17 @@
 #!/bin/bash
 
-SERVER=$1
-PORT=$2
-USER=$3
+BSERVER=$1
+RSERVER=$2
+PORT=$3
+USER=$4
+VHUB=$5
 
-if [ -z $SERVER ]; then
-    SERVER=127.0.0.1
+if [ -z $BSERVER ]; then
+    BSERVER=127.0.0.1
+fi
+
+if [ -z $RSERVER ]; then
+    RSERVER=127.0.0.1
 fi
 
 if [ -z $PORT ]; then
@@ -16,8 +22,12 @@ if [ -z $USER ]; then
     USER=user0
 fi
 
-vpncmd $SERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadeCreate default /SERVER:$SERVER:$PORT /HUB:DEFAULT /USERNAME:$USER
-vpncmd $SERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadePasswordSet default /PASSWORD:$USER /TYPE:standard
-vpncmd $SERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadeOnline default
+if [ -z $VHUB ]; then
+    VHUB=DEFAULT
+fi
+
+vpncmd $BSERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadeCreate default /SERVER:$RSERVER:$PORT /HUB:$VHUB /USERNAME:$USER
+vpncmd $BSERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadePasswordSet default /PASSWORD:$USER /TYPE:standard
+vpncmd $BSERVER:$PORT /SERVER /HUB:BRIDGE /CMD:CascadeOnline default
 
 echo "Cascade connection is ready."
