@@ -14,9 +14,14 @@
 
 SERVER=$1
 USER=$2
+VHUB=$3
 
 if [ -z $SERVER ]; then
     SERVER=127.0.0.1
+fi
+
+if [ -z $VHUB ]; then
+    VHUB=DEFAULT
 fi
 
 if [ -z $USER ]; then
@@ -25,7 +30,7 @@ fi
 
 echo "Configuring SoftEther VPN Client..."
 
-./client-configuration/ethernet-over-ssl-client.sh $SERVER $USER
+./client-configuration/ethernet-over-ssl-client.sh $SERVER $USER $VHUB
 
 echo "Getting IP address on the virtual interface..."
 ifdown vpn_vpn0 &> /dev/null

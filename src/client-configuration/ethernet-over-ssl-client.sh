@@ -31,6 +31,7 @@ fi
 
 echo "Creating Virtual Adapter 'vpn0'..."
 vpncmd localhost /CLIENT /CMD NicCreate vpn0 &> /dev/null
+cp -f files/ifcfg-vpn_vpn0 /etc/sysconfig/network-scripts/
 
 echo "Creating connection settings 'default'..."
 vpncmd localhost /CLIENT /CMD AccountCreate default /SERVER:$SERVER:5555 /HUB:$VHUB /USERNAME:$USER /NICNAME:vpn0 &> /dev/null
