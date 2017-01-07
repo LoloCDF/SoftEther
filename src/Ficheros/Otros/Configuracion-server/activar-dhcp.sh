@@ -1,15 +1,14 @@
 #!/bin/bash
 
 ############################################################
-# File: enable-dhcp.sh                                     #
-# Author: Manuel Aragón Añino                              #
-# Date: 26/12/2016                                         #
+# Archivo: activar-dhcp.sh                                 #
+# Autor: Manuel Aragón Añino                               #
+# Fecha: 26/12/2016                                        #
 #                                                          #
-# Description: this shell script will enable the dhcp      #
-# feature on the choosen server and virtual hub. Keep in   #
-# mind that it won't configure the dhcp server for you.    #
+# Descripción: este script activa el DHCP pero no lo       #
+# configura                                                #
 #                                                          #
-# Usage: . enable-dhcp.sh SERVER_IP VHUB_NAME              #
+# Uso: . activar-dhcp.sh SERVER_IP VHUB_NAME               #
 ############################################################
 
 SERVER=$1
@@ -26,4 +25,4 @@ fi
 vpncmd $SERVER:5555 /SERVER /HUB:$VHUB /CMD NatEnable &> /dev/null
 vpncmd $SERVER:5555 /SERVER /HUB:$VHUB /CMD DhcpEnable &> /dev/null
 vpncmd $SERVER:5555 /SERVER /HUB:$VHUB /CMD SecureNatEnable &> /dev/null
-echo "Virtual DHCP server enabled on $SERVER server / $VHUB virtual hub."
+echo "Virtual DHCP server activado en  $SERVER server / $VHUB virtual hub."
